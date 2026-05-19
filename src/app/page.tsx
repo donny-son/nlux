@@ -13,6 +13,7 @@ export default function Home() {
     () => colorSchemes.find((s) => s.id === defaultSchemeId) ?? colorSchemes[0]
   );
   const [settings, setSettings] = useState(defaultFluxSettings);
+  const [panelOpen, setPanelOpen] = useState(false);
 
   const updateSettings = (next: Partial<FluxSettings>) => {
     setSettings((current) => ({ ...current, ...next }));
@@ -30,6 +31,8 @@ export default function Home() {
         settings={settings}
         onChange={updateSettings}
         onReset={() => setSettings(defaultFluxSettings)}
+        mobileOpen={panelOpen}
+        onMobileClose={() => setPanelOpen(false)}
       />
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center px-4 pb-5 sm:justify-start sm:pl-6">
@@ -43,7 +46,7 @@ export default function Home() {
         </a>
       </div>
 
-      <Footer />
+      <Footer onOpenPanel={() => setPanelOpen(true)} />
     </main>
   );
 }
