@@ -5,18 +5,10 @@ import { colorSchemes, type ColorScheme } from "../lib/colorSchemes";
 type Props = {
   value: ColorScheme;
   onChange: (scheme: ColorScheme) => void;
+  onRandomize: () => void;
 };
 
-export default function SchemePicker({ value, onChange }: Props) {
-  const randomize = () => {
-    const pool = colorSchemes.filter((s) => s.id !== value.id);
-    const next =
-      pool.length > 0
-        ? pool[Math.floor(Math.random() * pool.length)]
-        : colorSchemes[Math.floor(Math.random() * colorSchemes.length)];
-    onChange(next);
-  };
-
+export default function SchemePicker({ value, onChange, onRandomize }: Props) {
   return (
     <div className="pointer-events-auto flex flex-wrap items-center gap-2 rounded-full border border-white/10 bg-black/35 px-3 py-2 text-xs text-white/85 backdrop-blur-md">
       <span className="px-1 font-mono uppercase tracking-widest text-white/60">
@@ -54,9 +46,9 @@ export default function SchemePicker({ value, onChange }: Props) {
       <span className="h-3 w-px bg-white/15" aria-hidden />
       <button
         type="button"
-        onClick={randomize}
-        aria-label="Random color scheme"
-        title="Random color scheme"
+        onClick={onRandomize}
+        aria-label="Randomize everything"
+        title="Randomize everything"
         className="inline-flex items-center justify-center rounded-full p-1.5 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
       >
         <svg
