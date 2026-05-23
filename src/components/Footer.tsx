@@ -20,7 +20,7 @@ export default function Footer({ onOpenPanel }: Props) {
           onClick={onOpenPanel}
           aria-label="Open control panel"
           title="Open control panel"
-          className="inline-flex items-center gap-1 rounded-full px-1 transition-colors hover:text-white sm:hidden"
+          className="inline-flex items-center gap-1 rounded-full px-1 transition-colors hover:text-white"
         >
           <svg
             width="12"
@@ -53,7 +53,7 @@ export default function Footer({ onOpenPanel }: Props) {
           </svg>
           Controls
         </button>
-        <span className="h-3 w-px bg-white/15 sm:hidden" aria-hidden />
+        <span className="h-3 w-px bg-white/15" aria-hidden />
         {links.map((link, i) => (
           <span key={link.href} className="flex items-center gap-2">
             {i > 0 && <span className="h-3 w-px bg-white/15" aria-hidden />}
