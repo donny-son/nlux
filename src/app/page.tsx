@@ -6,7 +6,12 @@ import FluxCanvas from "../components/FluxCanvas";
 import { defaultFluxSettings, type FluxSettings } from "../components/FluxCanvas";
 import Footer from "../components/Footer";
 import SchemePicker from "../components/SchemePicker";
-import { colorSchemes, defaultSchemeId } from "../lib/colorSchemes";
+import {
+  colorSchemes,
+  defaultSchemeId,
+  randomScheme,
+} from "../lib/colorSchemes";
+import { randomFluxSettings } from "../lib/fluxRandom";
 
 export default function Home() {
   const [scheme, setScheme] = useState(
@@ -19,20 +24,29 @@ export default function Home() {
     setSettings((current) => ({ ...current, ...next }));
   };
 
+  const randomizeAll = () => {
+    setScheme((current) => randomScheme(current));
+    updateSettings(randomFluxSettings());
+  };
+
   return (
     <main className="relative h-dvh w-screen overflow-hidden bg-black">
       <FluxCanvas scheme={scheme} settings={settings} />
 
       <div className="pointer-events-none absolute inset-x-0 top-0 flex justify-center px-4 pt-5 sm:justify-start sm:pl-6">
-        <SchemePicker value={scheme} onChange={setScheme} />
+        <SchemePicker
+          value={scheme}
+          onChange={setScheme}
+          onRandomize={randomizeAll}
+        />
       </div>
 
       <ControlPanel
         settings={settings}
         onChange={updateSettings}
         onReset={() => setSettings(defaultFluxSettings)}
-        mobileOpen={panelOpen}
-        onMobileClose={() => setPanelOpen(false)}
+        open={panelOpen}
+        onClose={() => setPanelOpen(false)}
       />
 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center px-4 pb-5 sm:justify-start sm:pl-6">

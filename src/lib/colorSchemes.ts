@@ -91,3 +91,11 @@ export function sampleScheme(scheme: ColorScheme, t: number): RGB {
 }
 
 export const defaultSchemeId = "original";
+
+export function randomScheme(exclude?: ColorScheme): ColorScheme {
+  const pool = exclude
+    ? colorSchemes.filter((s) => s.id !== exclude.id)
+    : colorSchemes;
+  const list = pool.length > 0 ? pool : colorSchemes;
+  return list[Math.floor(Math.random() * list.length)];
+}
